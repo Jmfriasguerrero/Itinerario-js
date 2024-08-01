@@ -1,3 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
 h1 {
-    color: cornflowerblue;
+    text-align: center;
+    margin: 20px 0;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#formAgregarTarea {
+    display: inline-block;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+input, select, button {
+    margin: 5px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0 20px;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    font-size: 1.2em;
+    margin: 0 0 10px 0;
+}
+
+.listaTareas {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.listaTareas li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.listaTareas li.completed {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.listaTareas li:last-child {
+    border-bottom: none;
 }

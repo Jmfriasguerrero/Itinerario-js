@@ -1,24 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <title>Proyecto JS</title>
-    <script  async src="./script.js"></script>
-    
+    <script defer src="./script.js"></script>
 </head>
 <body>
     <h1>Itinerario diario de Juan Manuel Frias Guerrero</h1>
-
     <form id="formAgregarTarea">
-        <input type="text" id="nuevaTarea" placeholder="Nueva tarea" required>
+        <label for="nuevaTarea">Nueva tarea:</label>
+        <input type="text" id="nuevaTarea" placeholder="Escribe una nueva tarea" required>
+        <label for="diaSemana">Día de la semana:</label>
+        <select id="diaSemana" required>
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes</option>
+            <option value="miercoles">Miércoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+        </select>
         <button type="submit">Agregar Tarea</button>
     </form>
     
-    <ul id="listaTareas"></ul>
-
-    
-    
+    <div class="cards">
+        <div class="card" id="lunes">
+            <h2>Lunes</h2>
+            <ul class="listaTareas"></ul>
+        </div>
+        <div class="card" id="martes">
+            <h2>Martes</h2>
+            <ul class="listaTareas"></ul>
+        </div>
+        <div class="card" id="miercoles">
+            <h2>Miércoles</h2>
+            <ul class="listaTareas"></ul>
+        </div>
+        <div class="card" id="jueves">
+            <h2>Jueves</h2>
+            <ul class="listaTareas"></ul>
+        </div>
+        <div class="card" id="viernes">
+            <h2>Viernes</h2>
+            <ul class="listaTareas"></ul>
+        </div>
+        <div class="card" id="sabado">
+            <h2>Sábado</h2>
+            <ul class="listaTareas"></ul>
+        </div>
+        <div class="card" id="domingo">
+            <h2>Domingo</h2>
+            <ul class="listaTareas"></ul>
+        </div>
+    </div>
 </body>
 </html>
