@@ -3,57 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Diaria de Tareas</title>
     <link rel="stylesheet" href="./css/style.css">
-    <title>Proyecto JS</title>
-    <script defer src="./script.js"></script>
+    <script async src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 </head>
 <body>
-    <h1>Itinerario diario de Juan Manuel Frias Guerrero</h1>
-    <form id="formAgregarTarea">
-        <label for="nuevaTarea">Nueva tarea:</label>
-        <input type="text" id="nuevaTarea" placeholder="Escribe una nueva tarea" required>
-        <label for="diaSemana">Día de la semana:</label>
-        <select id="diaSemana" required>
-            <option value="lunes">Lunes</option>
-            <option value="martes">Martes</option>
-            <option value="miercoles">Miércoles</option>
-            <option value="jueves">Jueves</option>
-            <option value="viernes">Viernes</option>
-            <option value="sabado">Sábado</option>
-            <option value="domingo">Domingo</option>
+    <h1>AGENDA DIARIA JUAN MANUEL FRIAS</h1>
+    <div class="formulario">
+        <label for="dia">Día:</label>
+        <select id="dia">
+            <option value="Lunes">Lunes</option>
+            <option value="Martes">Martes</option>
+            <option value="Miércoles">Miércoles</option>
+            <option value="Jueves">Jueves</option>
+            <option value="Viernes">Viernes</option>
         </select>
-        <button type="submit">Agregar Tarea</button>
-    </form>
-    
-    <div class="cards">
-        <div class="card" id="lunes">
-            <h2>Lunes</h2>
-            <ul class="listaTareas"></ul>
-        </div>
-        <div class="card" id="martes">
-            <h2>Martes</h2>
-            <ul class="listaTareas"></ul>
-        </div>
-        <div class="card" id="miercoles">
-            <h2>Miércoles</h2>
-            <ul class="listaTareas"></ul>
-        </div>
-        <div class="card" id="jueves">
-            <h2>Jueves</h2>
-            <ul class="listaTareas"></ul>
-        </div>
-        <div class="card" id="viernes">
-            <h2>Viernes</h2>
-            <ul class="listaTareas"></ul>
-        </div>
-        <div class="card" id="sabado">
-            <h2>Sábado</h2>
-            <ul class="listaTareas"></ul>
-        </div>
-        <div class="card" id="domingo">
-            <h2>Domingo</h2>
-            <ul class="listaTareas"></ul>
-        </div>
+        <label for="descripcion">Tarea:</label>
+        <input type="text" id="descripcion" />
+        <label for="prioridad">Prioridad:</label>
+        <select id="prioridad">
+            <option value="alta">Alta</option>
+            <option value="media">Media</option>
+            <option value="baja">Baja</option>
+        </select>
+        <button onclick="agregarTarea()">Agregar Tarea</button>
+        <button onclick="mostrarPendientes()">Mostrar Pendientes</button>
     </div>
+    <div id="agenda"></div>
 </body>
 </html>

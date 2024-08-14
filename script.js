@@ -1,112 +1,154 @@
-let tareas = {
-    lunes: [],
-    martes: [],
-    miercoles: [],
-    jueves: [],
-    viernes: [],
-    sabado: [],
-    domingo: []
-};
+const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+let tareas = JSON.parse(localStorage.getItem('tareas')) || [];
 
-// Funciones para LocalStorage
-function guardarTareas() {
-    localStorage.setItem('tareas', JSON.stringify(tareas));
-}
-
-function cargarTareas() {
-    const tareasGuardadas = localStorage.getItem('tareas');
-    if (tareasGuardadas) {
-        tareas = JSON.parse(tareasGuardadas);
-    }
-}
-
-// Agregar tarea
-function agregarTarea(descripcion, dia) {
-    if (!descripcion.trim()) {
-        console.log("La descripción de la tarea no puede estar vacía.");
-        return;
-    }
-    if (!tareas[dia]) {
-        console.error(`El día seleccionado (${dia}) no es válido.`);
-        return;
-    }
-    const nuevaTarea = { descripcion, completada: false };
-    tareas[dia].push(nuevaTarea);
-    guardarTareas();
-    mostrarTareas();
-}
-
-// Eliminar tarea
-function eliminarTarea(dia, indice) {
-    if (indice >= 0 && indice < tareas[dia].length) {
-        tareas[dia].splice(indice, 1);
-        guardarTareas();
-        mostrarTareas();
-    } else {
-        console.log("Índice de tarea erróneo.");
-    }
-}
-
-// Marcar tarea como completada
-function marcarCompletada(dia, indice) {
-    if (indice >= 0 && indice < tareas[dia].length) {
-        tareas[dia][indice].completada = !tareas[dia][indice].completada;
-        guardarTareas();
-        mostrarTareas();
-    } else {
-        console.log("Índice de tarea inválido.");
-    }
-}
-
-// Crear elemento tarea
-function crearElementoTarea(tarea, dia, indice) {
-    const itemTarea = document.createElement('li');
-    itemTarea.textContent = `${indice + 1}: ${tarea.completada ? '[Completada] ' : ''}${tarea.descripcion}`;
-    itemTarea.className = tarea.completada ? 'completed' : '';
-    itemTarea.addEventListener('click', () => marcarCompletada(dia, indice));
-    return itemTarea;
-}
-
-// Mostrar tareas
-function mostrarTareas() {
-    Object.keys(tareas).forEach(dia => {
-        // Depurar el valor de `dia` y el selector generado
-        console.log(`Mostrando tareas para ${dia}`);
-        const selector = `#${dia} .listaTareas`;
-        console.log(`Selector generado: ${selector}`);
-        
-        const listaTareas = Document.querySelector(selector);
-
-        if (listaTareas) {
-            listaTareas.innerHTML = '';
-            tareas[dia].forEach((tarea, indice) => {
-                const itemTarea = crearElementoTarea(tarea, dia, indice);
-                listaTareas.appendChild(itemTarea);
-            });
-        } else {
-            console.error(`No se encontró el elemento de lista para el selector ${selector}`);
-        }
+// Promesa para simular la obtención de datos asíncrona
+function obtenerTareas() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                resolve(tareas);
+            } catch (error) {
+                console.error("Error al obtener las tareas:", error.message);
+                reject(error);
+            }
+        }, 1000);
     });
 }
 
-// Event listener para agregar tarea
-document.getElementById('formAgregarTarea').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const nuevaTarea = document.getElementById('nuevaTarea').value;
-    const diaSemana = document.getElementById('diaSemana').value;
-
-    // Depurar el valor de `diaSemana`
-    console.log(`Nueva tarea: ${nuevaTarea}, Día: ${diaSemana}`);
-    
-    // Asegúrate de que `diaSemana` sea uno de los días válidos
-    if (tareas[diaSemana]) {
-        agregarTarea(nuevaTarea, diaSemana);
-        document.getElementById('nuevaTarea').value = '';
-    } else {
-        console.error(`El día seleccionado (${diaSemana}) no es válido.`);
+// Función para guardar tareas en localStorage
+function guardarTareas() {
+    try {
+        localStorage.setItem('tareas', JSON.stringify(tareas));
+        console.log("Tareas guardadas con éxito.");
+    } catch (error) {
+        console.error("Error al guardar las tareas en localStorage:", error.message);
+    } finally {
+        console.log("Operación de guardado completada.");
     }
-});
+}
 
-// Cargar y mostrar tareas al inicio
-cargarTareas();
-mostrarTareas();
+// Función para agregar tareas
+function agregarTarea() {
+    try {
+        const dia = document.getElementById('dia').value;
+        const descripcion = document.getElementById('descripcion').value;
+        const prioridad = document.getElementById('prioridad').value;
+
+        if (descripcion) {
+            tareas.push({ dia, descripcion, prioridad, completada: false });
+            guardarTareas();
+            renderizarAgenda();
+        } else {
+            throw new Error("La descripción de la tarea no puede estar vacía.");
+        }
+    } catch (error) {
+        console.error("Error al agregar la tarea:", error.message);
+    } finally {
+        console.log("Operación de agregar tarea completada.");
+    }
+}
+
+// Función para eliminar una tarea
+function eliminarTarea(index) {
+    try {
+        if (index < 0 || index >= tareas.length) {
+            throw new Error("Índice de tarea no válido.");
+        }
+        tareas.splice(index, 1);
+        guardarTareas();
+        renderizarAgenda();
+    } catch (error) {
+        console.error("Error al eliminar la tarea:", error.message);
+    } finally {
+        console.log("Operación de eliminar tarea completada.");
+    }
+}
+
+// Función para marcar una tarea como completada
+function completarTarea(index) {
+    try {
+        if (index < 0 || index >= tareas.length) {
+            throw new Error("Índice de tarea no válido.");
+        }
+        tareas[index].completada = !tareas[index].completada;
+        guardarTareas();
+        renderizarAgenda();
+    } catch (error) {
+        console.error("Error al completar la tarea:", error.message);
+    } finally {
+        console.log("Operación de completar tarea completada.");
+    }
+}
+
+// Función para mostrar solo las tareas pendientes
+function mostrarPendientes() {
+    try {
+        const pendientes = tareas.filter(tarea => !tarea.completada);
+        renderizarAgenda(pendientes);
+    } catch (error) {
+        console.error("Error al filtrar las tareas pendientes:", error.message);
+    } finally {
+        console.log("Operación de mostrar tareas pendientes completada.");
+    }
+}
+
+// Función para ordenar las tareas por prioridad
+function ordenarPorPrioridad(tareas) {
+    const prioridadOrden = { alta: 1, media: 2, baja: 3 };
+    return tareas.sort((a, b) => prioridadOrden[a.prioridad] - prioridadOrden[b.prioridad]);
+}
+
+// Función para renderizar la agenda
+function renderizarAgenda(filtradas = tareas) {
+    try {
+        const agenda = document.getElementById('agenda');
+        agenda.innerHTML = '';
+
+        diasSemana.forEach(dia => {
+            const tablaDia = document.createElement('table');
+            const encabezado = document.createElement('thead');
+            encabezado.innerHTML = `<tr><th>${dia}</th></tr>`;
+            tablaDia.appendChild(encabezado);
+
+            const cuerpoTabla = document.createElement('tbody');
+
+            const tareasDia = ordenarPorPrioridad(filtradas.filter(tarea => tarea.dia === dia));
+            
+            tareasDia.forEach((tarea, index) => {
+                const fila = document.createElement('tr');
+                fila.className = `tarea`;
+
+                // Añadir ítem de color según la prioridad
+                const colorPrioridad = tarea.prioridad === 'alta' ? 'red' : tarea.prioridad === 'media' ? 'yellow' : 'green';
+                const itemPrioridad = `<span style="color:${colorPrioridad}; font-weight:bold;">●</span>`;
+
+                if (tarea.completada) {
+                    fila.classList.add('completada');
+                }
+
+                // Añadir descripción de tarea, botón de completar y eliminar
+                fila.innerHTML = `
+                    <td>${itemPrioridad} <span onclick="completarTarea(${tareas.indexOf(tarea)})">${tarea.descripcion}</span></td>
+                    <td><button onclick="eliminarTarea(${tareas.indexOf(tarea)})">Eliminar</button></td>
+                `;
+
+                cuerpoTabla.appendChild(fila);
+            });
+
+            tablaDia.appendChild(cuerpoTabla);
+            agenda.appendChild(tablaDia);
+        });
+    } catch (error) {
+        console.error("Error al renderizar la agenda:", error.message);
+    } finally {
+        console.log("Operación de renderizado completada.");
+    }
+}
+
+// Inicializar la agenda con las tareas actuales
+obtenerTareas()
+    .then(() => renderizarAgenda())
+    .catch(error => console.error("Error al inicializar la agenda:", error.message))
+    .finally(() => console.log("Inicialización de la agenda completada."));
+
+

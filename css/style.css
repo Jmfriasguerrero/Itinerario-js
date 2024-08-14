@@ -1,85 +1,104 @@
+/* Estilos generales */
+h1{
+    color: #000120;
+}
 body {
     font-family: Arial, sans-serif;
+    background-color: #9daab3;
     margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    padding: 20px;
 }
 
-h1 {
-    text-align: center;
-    margin: 20px 0;
-}
-
-form {
-    text-align: center;
+.formulario {
     margin-bottom: 20px;
+    padding: 20px;
+    background-color: #cfd9e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
-#formAgregarTarea {
-    display: inline-block;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-input, select, button {
+select, input, button {
     margin: 5px;
     padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #b7c6d8fa;
 }
 
 button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    background-color: #02725a;
+    color: white;
     cursor: pointer;
+    border: none;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #02725a;
 }
 
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 0 20px;
+/* Estilo de las tablas */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 20px;
+    background-color: #b7c6d8fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 10px;
-    width: 250px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+th, td {
+    padding: 15px;
+    text-align: left;
 }
 
-.card h2 {
-    font-size: 1.2em;
-    margin: 0 0 10px 0;
+th {
+    background-color: #163c64;
+    color: #cfd9e0;
+    font-size: 16px;
+    font-weight: bold;
 }
 
-.listaTareas {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+tbody tr:nth-child(odd) {
+    background-color: #cfd9e0;
 }
 
-.listaTareas li {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
+tbody tr:nth-child(even) {
+    background-color: #cfd9e0;
 }
 
-.listaTareas li.completed {
+tbody tr:hover {
+    background-color: #b7c6d8fa;
+}
+
+.completada {
     text-decoration: line-through;
-    color: #999;
+    color: rgb(58, 51, 99);
 }
 
-.listaTareas li:last-child {
-    border-bottom: none;
+/* Estilo de las tareas según prioridad */
+.tarea {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    color: rgb(2, 1, 43);
+    font-weight: bold;
+}
+
+.prioridad.alta {
+    background-color: #dc3545; /* Rojo */
+}
+
+.prioridad.media {
+    background-color: #ffc107; /* Amarillo */
+    color: black;
+}
+
+.prioridad.baja {
+    background-color: #28a745; /* Verde */
+}
+
+.tarea:hover {
+    opacity: 0.8;
 }
