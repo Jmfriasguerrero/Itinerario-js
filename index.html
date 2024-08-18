@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda Diaria de Tareas</title>
+    <title>Agenda Diaria</title>
     <link rel="stylesheet" href="./css/style.css">
     <script async src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <h1>AGENDA DIARIA JUAN MANUEL FRIAS</h1>
-    <div class="formulario">
+    <h1>Agenda Diaria de Juan Manuel Frias</h1>
+    <div>
         <label for="dia">Día:</label>
         <select id="dia">
             <option value="Lunes">Lunes</option>
@@ -19,17 +19,26 @@
             <option value="Jueves">Jueves</option>
             <option value="Viernes">Viernes</option>
         </select>
-        <label for="descripcion">Tarea:</label>
-        <input type="text" id="descripcion" />
+    </div>
+    <div>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" placeholder="Descripción de la tarea">
+    </div>
+    <div>
         <label for="prioridad">Prioridad:</label>
         <select id="prioridad">
             <option value="alta">Alta</option>
             <option value="media">Media</option>
             <option value="baja">Baja</option>
         </select>
-        <button onclick="agregarTarea()">Agregar Tarea</button>
-        <button onclick="mostrarPendientes()">Mostrar Pendientes</button>
     </div>
-    <div id="agenda"></div>
+    <button onclick="agregarTarea()">Agregar Tarea</button>
+
+    <div id="agenda">
+        <!-- Aqui se generan las tablas para los dias de la semana -->
+    </div>
+
+    
 </body>
 </html>
+
